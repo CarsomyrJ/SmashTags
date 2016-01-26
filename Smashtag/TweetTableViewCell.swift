@@ -2,8 +2,8 @@
 //  TweetTableViewCell.swift
 //  Smashtag
 //
-//  Created by Martin Mandl on 06.03.15.
-//  Copyright (c) 2015 m2m server software gmbh. All rights reserved.
+//  Created by CS193p Instructor.
+//  Copyright (c) 2015 Stanford University. All rights reserved.
 //
 
 import UIKit
@@ -22,11 +22,13 @@ class TweetTableViewCell: UITableViewCell
     @IBOutlet weak var tweetCreatedLabel: UILabel!
     
     func updateUI() {
+        // reset any existing tweet information
         tweetTextLabel?.attributedText = nil
         tweetScreenNameLabel?.text = nil
         tweetProfileImageView?.image = nil
         tweetCreatedLabel?.text = nil
         
+        // load new information from our tweet (if any)
         if let tweet = self.tweet
         {
             tweetTextLabel?.text = tweet.text
@@ -36,10 +38,10 @@ class TweetTableViewCell: UITableViewCell
                 }
             }
             
-            tweetScreenNameLabel?.text = "\(tweet.user)"
+            tweetScreenNameLabel?.text = "\(tweet.user)" // tweet.user.description
             
             if let profileImageURL = tweet.user.profileImageURL {
-                if let imageData = NSData(contentsOfURL: profileImageURL) {
+                if let imageData = NSData(contentsOfURL: profileImageURL) { // blocks main thread!
                     tweetProfileImageView?.image = UIImage(data: imageData)
                 }
             }
@@ -54,5 +56,4 @@ class TweetTableViewCell: UITableViewCell
         }
         
     }
-
 }
